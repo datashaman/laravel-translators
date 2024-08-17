@@ -7,43 +7,55 @@ return [
         'azure' => [
             'key' => env('TRANSLATORS_AZURE_KEY'),
             'region' => env('TRANSLATORS_AZURE_REGION', 'westus'),
+            'options' => [
+                'api-version' => '3.0',
+            ],
         ],
 
         'deepl' => [
             'api_key' => env('TRANSLATORS_DEEPL_API_KEY'),
+            'options' => [],
         ],
 
         'google-v2' => [
             'project' => env('TRANSLATORS_GOOGLE_KEY'),
+            'options' => [
+                'format' => 'text',
+            ],
         ],
 
         'google-v3' => [
             'project' => env('TRANSLATORS_GOOGLE_PROJECT'),
+            'options' => [],
         ],
 
         'openai' => [
             'api_key' => env('TRANSLATORS_OPENAI_API_KEY', env('OPENAI_API_KEY')),
-            'model' => env('TRANSLATORS_OPENAI_MODEL', 'gpt-4o-mini'),
             'prompt' => 'Translate the following list of messages into the target locale. Preserve the original meaning and formatting.',
-            'response_format' => [
-                'type' => 'json_schema',
-                'json_schema' => [
-                    'name' => 'translation',
-                    'strict' => true,
-                    'schema' => [
-                        'type' => 'object',
-                        'properties' => [
-                            'translations' => [
-                                'type' => 'array',
-                                'description' => 'List of translated messages in the same order as the input',
-                                'items' => [
-                                    'type' => 'string',
-                                    'description' => 'Translated message',
+            'options' => [
+                'model' => env('TRANSLATORS_OPENAI_MODEL', 'gpt-4o-mini'),
+
+                // You probably don't want to change this
+                'response_format' => [
+                    'type' => 'json_schema',
+                    'json_schema' => [
+                        'name' => 'translation',
+                        'strict' => true,
+                        'schema' => [
+                            'type' => 'object',
+                            'properties' => [
+                                'translations' => [
+                                    'type' => 'array',
+                                    'description' => 'List of translated messages in the same order as the input',
+                                    'items' => [
+                                        'type' => 'string',
+                                        'description' => 'Translated message',
+                                    ],
                                 ],
                             ],
+                            'required' => ['translations'],
+                            'additionalProperties' => false,
                         ],
-                        'required' => ['translations'],
-                        'additionalProperties' => false,
                     ],
                 ],
             ],

@@ -31,7 +31,13 @@ class GoogleV3Translator implements TranslatorInterface
 
             $response = $this
                 ->client
-                ->translateText($request, $options);
+                ->translateText(
+                    $request,
+                    array_merge_recursive(
+                        config('translators.services.google-v3.options'),
+                        $options
+                    )
+                );
 
             $translations = [];
 

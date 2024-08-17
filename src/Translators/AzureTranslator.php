@@ -14,16 +14,16 @@ class AzureTranslator implements TranslatorInterface
         array $options = []
     ): array {
         $client = Http::withQueryParameters(
-            array_merge(
+            array_merge_recursive(
+                config('translators.services.azure.options'),
+                $options,
                 [
-                    'api-version' => '3.0',
                     'to' => $locale,
-                ],
-                $options
+                ]
             )
         )->withHeaders([
-            'Ocp-Apim-Subscription-Key' => config('translators.services.microsoft.key'),
-            'Ocp-Apim-Subscription-Region' => config('translators.services.microsoft.region'),
+            'Ocp-Apim-Subscription-Key' => config('translators.services.azure.key'),
+            'Ocp-Apim-Subscription-Region' => config('translators.services.azure.region'),
         ]);
 
         $contents = array_map(

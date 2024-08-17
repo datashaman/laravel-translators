@@ -17,13 +17,13 @@ class GoogleV2Translator implements TranslatorInterface
     ): array {
         $translations = $this->client->translateBatch([
             'strings' => $contents,
-            array_merge(
+            array_merge_recursive(
+                config('translators.services.google-v2.options'),
+                $options,
                 [
                     'target' => $locale,
-                    'format' => 'text',
-                ],
-                $options
-            ),
+                ]
+            )
         ]);
 
         return array_map(

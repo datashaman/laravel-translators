@@ -30,13 +30,12 @@ class OpenAITranslator implements TranslatorInterface
             ],
         ];
 
-        $arguments = array_merge(
+        $arguments = array_merge_recursive(
+            config('translators.services.openai.options'),
+            $options,
             [
-                'model' => config('translators.services.openai.model'),
                 'messages' => $messages,
-                'response_format' => config('translators.services.openai.response_format'),
             ],
-            $options
         );
 
         $response = $this->client->chat()->create($arguments);
