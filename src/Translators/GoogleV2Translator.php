@@ -23,7 +23,7 @@ class GoogleV2Translator implements TranslatorInterface
                 [
                     'target' => $locale,
                 ]
-            )
+            ),
         ]);
 
         return array_map(
