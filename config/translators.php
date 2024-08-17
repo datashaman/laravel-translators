@@ -18,14 +18,16 @@ return [
         ],
 
         'google-v2' => [
-            'project' => env('TRANSLATORS_GOOGLE_KEY'),
+            'construct' => [
+                'keyFilePath' => env('TRANSLATORS_GOOGLE_KEY_FILE', base_path('keys/google.json')),
+            ],
             'options' => [
                 'format' => 'text',
             ],
         ],
 
         'google-v3' => [
-            'project' => env('TRANSLATORS_GOOGLE_PROJECT'),
+            'project' => env('TRANSLATORS_GOOGLE_PROJECT', env('GOOGLE_CLOUD_PROJECT')),
             'options' => [],
         ],
 

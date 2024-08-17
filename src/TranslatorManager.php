@@ -17,6 +17,11 @@ class TranslatorManager extends Manager
         return $this->config->get('translators.default');
     }
 
+    public function createAzureDriver(): TranslatorInterface
+    {
+        return resolve(AzureTranslator::class);
+    }
+
     public function createDeeplDriver(): TranslatorInterface
     {
         return resolve(DeepLTranslator::class);
@@ -30,11 +35,6 @@ class TranslatorManager extends Manager
     public function createGoogleV3Driver(): TranslatorInterface
     {
         return resolve(GoogleV3Translator::class);
-    }
-
-    public function createAzureaiDriver(): TranslatorInterface
-    {
-        return resolve(AzureTranslator::class);
     }
 
     public function createOpenaiDriver(): TranslatorInterface

@@ -3,6 +3,7 @@
 namespace Datashaman\LaravelTranslators\Translators;
 
 use Datashaman\LaravelTranslators\Contracts\TranslatorInterface;
+use Google\Cloud\Translate\V2\TranslateClient;
 
 class GoogleV2Translator implements TranslatorInterface
 {
@@ -15,8 +16,8 @@ class GoogleV2Translator implements TranslatorInterface
         string $locale,
         array $options = []
     ): array {
-        $translations = $this->client->translateBatch([
-            'strings' => $contents,
+        $translations = $this->client->translateBatch(
+            $contents,
             array_merge_recursive(
                 config('translators.services.google-v2.options'),
                 $options,
@@ -24,7 +25,7 @@ class GoogleV2Translator implements TranslatorInterface
                     'target' => $locale,
                 ]
             ),
-        ]);
+        );
 
         return array_map(
             fn ($translation) => $translation['text'],

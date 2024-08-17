@@ -21,7 +21,7 @@ class DeepLTranslator implements TranslatorInterface
             sourceLang: null,
             targetLang: $locale,
             options: array_merge_recursive(
-                config('translators.service.deepl.options'),
+                config('translators.services.deepl.options'),
                 $options,
             )
         );

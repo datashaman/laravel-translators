@@ -19,10 +19,7 @@ class LaravelTranslatorsServiceProvider extends PackageServiceProvider
             $this->app->singleton(Client::class, fn () => OpenAI::client(config('translators.services.openai.api_key')));
         }
 
-        $this->app->singleton(TranslateClient::class, fn () => new TranslateClient([
-            'key' => config('translators.services.google-v2.key'),
-        ]));
-
+        $this->app->singleton(TranslateClient::class, fn () => new TranslateClient(config('translators.services.google-v2.construct')));
         $this->app->singleton(Translator::class, fn () => new Translator(config('translators.services.deepl.api_key')));
         $this->app->singleton('translator-manager', fn ($app) => new TranslatorManager($app));
     }
