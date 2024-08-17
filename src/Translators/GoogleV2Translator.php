@@ -3,8 +3,6 @@
 namespace Datashaman\LaravelTranslators\Translators;
 
 use Datashaman\LaravelTranslators\Contracts\TranslatorInterface;
-use Google\Cloud\Translate\V3\Client\TranslationServiceClient;
-use Google\Cloud\Translate\V3\TranslateTextRequest;
 
 class GoogleV2Translator implements TranslatorInterface
 {
@@ -25,11 +23,11 @@ class GoogleV2Translator implements TranslatorInterface
                     'format' => 'text',
                 ],
                 $options
-            )
+            ),
         ]);
 
         return array_map(
-            fn($translation) => $translation['text'],
+            fn ($translation) => $translation['text'],
             $translations
         );
     }

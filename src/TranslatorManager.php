@@ -31,6 +31,7 @@ class TranslatorManager extends Manager
     {
         return resolve(GoogleV3Translator::class);
     }
+
     public function createAzureaiDriver(): TranslatorInterface
     {
         return resolve(AzureTranslator::class);
