@@ -21,8 +21,10 @@ jobs:
           php-version: '8.2'
           coverage: none
 
-      - name: Install composer dependencies
-        uses: ramsey/composer-install@v3
+      - name: Install dependencies
+        run: |
+          composer install --no-interaction --no-progress
+          composer require $(composer suggests --list datashaman/laravel-translators) --no-interaction --no-progress
 
       - name: Run PHPStan
         run: ./vendor/bin/phpstan --error-format=github

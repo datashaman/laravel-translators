@@ -1,24 +1,24 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "datashaman/laravel-translators",
+    "description": "This is my package laravel-translators",
     "keywords": [
-        ":vendor_name",
         "laravel",
-        ":package_slug"
+        "translation",
+        "localization"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/datashaman/laravel-translators",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Marlin Forbes",
+            "email": "marlinf@datashaman.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.2",
-        "spatie/laravel-package-tools": "^1.16",
-        "illuminate/contracts": "^10.0||^11.0"
+        "illuminate/contracts": "^10.0||^11.0",
+        "spatie/laravel-package-tools": "^1.16"
     },
     "require-dev": {
         "laravel/pint": "^1.14",
@@ -33,21 +33,26 @@
         "phpstan/phpstan-phpunit": "^1.3",
         "spatie/laravel-ray": "^1.35"
     },
+    "suggest": {
+        "deeplcom/deepl-php": "For the DeepL Translator driver",
+        "google/cloud-translate": "For the Google Translate driver",
+        "openai-php/client": "For the OpenAI driver"
+    },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Datashaman\\LaravelTranslators\\": "src/",
+            "Datashaman\\LaravelTranslators\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/",
+            "Datashaman\\LaravelTranslators\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-translators --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -67,16 +72,17 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "phpstan/extension-installer": true
+            "phpstan/extension-installer": true,
+            "php-http/discovery": true
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Datashaman\\LaravelTranslators\\LaravelTranslatorsServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "Translator": "Datashaman\\LaravelTranslators\\Facades\\Translator"
             }
         }
     },
